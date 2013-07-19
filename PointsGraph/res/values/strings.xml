@@ -1,0 +1,11 @@
+<resources>
+
+	<string name="app_name">PointsGraph</string>
+	<string name="some_text">Блок информационного текста. Введите колличество точек для запроса</string>
+	<string name="menu_settings">Settings</string>
+    <string name="start">Поехали</string>
+    <string name="points_count">23</string>
+    <string name="incorrect_input">Ввод не корректен</string>
+    <string name="count_points_hint">Введите число точек. Целое, больше нуля</string>
+
+</resources>
