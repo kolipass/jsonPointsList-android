@@ -561,8 +561,7 @@ abstract public class GraphView extends LinearLayout {
 		graphSeries.remove(series);
 	}
 
-	public void removeSeries(int index)
-	{
+	public void removeSeries(int index) throws IndexOutOfBoundsException {
 		if (index < 0 || index >= graphSeries.size())
 		{
 			throw new IndexOutOfBoundsException("No series at index " + index);
