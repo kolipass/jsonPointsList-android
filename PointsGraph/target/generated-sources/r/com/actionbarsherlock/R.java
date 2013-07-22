@@ -947,11 +947,12 @@ containing a value of this type.
         public static int abs__up=0x7f04000b;
         public static int disableHome=0x7f040009;
         public static int edit_query=0x7f040026;
+        public static int graph=0x7f040035;
         public static int hello=0x7f040032;
         public static int homeAsUp=0x7f040006;
-        public static int label_text=0x7f040035;
+        public static int label_text=0x7f040036;
         public static int listMode=0x7f040002;
-        public static int menu_settings=0x7f040036;
+        public static int menu_settings=0x7f040037;
         public static int normal=0x7f040001;
         public static int point_count=0x7f040033;
         public static int showCustom=0x7f040008;

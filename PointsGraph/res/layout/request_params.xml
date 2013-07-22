@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false" android:orientation="vertical">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <TextView
+                android:id="@+id/hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/some_text"
+                android:layout_alignParentLeft="true" android:layout_marginLeft="5dp"
+                android:layout_alignParentTop="true"/>
+        <LinearLayout android:focusable="true"
+                      android:focusableInTouchMode="true" android:layout_width="0px"
+                      android:layout_height="0px"/>
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/point_count"
+                android:layout_below="@+id/hello"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
+                android:numeric="integer"
+                android:hint="@string/count_points_hint"
+                />
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start"
+                android:id="@+id/start"
+                android:layout_below="@+id/point_count"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

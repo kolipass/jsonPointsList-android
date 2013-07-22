@@ -7,5 +7,10 @@
     <string name="points_count">23</string>
     <string name="incorrect_input">Ввод не корректен</string>
     <string name="count_points_hint">Введите число точек. Целое, больше нуля</string>
+    <string name="line_title">Base line</string>
+    <string name="key_manager_error">Произошла проблема с хранилищем ключей сертификатов</string>
+    <string name="send_request_error">Ошибка при обращении к серверу</string>
+    <string name="server_return_error">Сервер вернул ошибку:</string>
+    <string name="parse_request_error">Получены некорректные данные от сервера</string>
 
 </resources>
