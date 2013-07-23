@@ -8,7 +8,7 @@ Easy launch:Maven
 Execute this in your workspace:
 ```
   git clone https://github.com/kolipass/jsonPointsList-android.git
-  cd ./RoundedImageView/
+  cd ./jsonPointsList-android/
   mvn clean install
 ```
 To run example:
