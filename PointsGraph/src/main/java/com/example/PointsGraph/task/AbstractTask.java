@@ -12,7 +12,7 @@ import java.util.Observable;
  * Date: 09.11.12
  * Родоначальник тасков. Тяжелая задача будет выполнена в новом потоке. Таск генерирует события.
  */
-public abstract class TaskAbstract extends Observable implements Runnable {
+public abstract class AbstractTask extends Observable implements Runnable {
     private final Object GUI_INITIALIZATION_MONITOR = new Object();
     protected String tag;
     protected AbstractStringResourceManager resourceManager;
@@ -21,7 +21,7 @@ public abstract class TaskAbstract extends Observable implements Runnable {
     Thread thread = null;
     private boolean pauseThreadFlag = false;
 
-    protected TaskAbstract(AbstractStringResourceManager resourceManager, String tag) {
+    protected AbstractTask(AbstractStringResourceManager resourceManager, String tag) {
         this.resourceManager = resourceManager;
         this.taskStatus = new TaskStatus(tag);
         this.tag = tag;

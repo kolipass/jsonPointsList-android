@@ -3,22 +3,26 @@
               android:layout_height="match_parent"
               android:baselineAligned="false" android:orientation="vertical">
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_gravity="center">
 
         <TextView
-                android:id="@+id/hello"
+                android:id="@+id/hello" style="?android:attr/textAppearanceLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/some_text"
                 android:layout_alignParentLeft="true" android:layout_marginLeft="5dp"
-                android:layout_alignParentTop="true"/>
+                android:layout_alignParentTop="true" android:maxWidth="500dp"/>
         <LinearLayout android:focusable="true"
                       android:focusableInTouchMode="true" android:layout_width="0px"
                       android:layout_height="0px"/>
         <EditText
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned"
                 android:ems="10"
@@ -28,7 +32,12 @@
                 android:padding="5dp"
                 android:numeric="integer"
                 android:hint="@string/count_points_hint"
-                />
+                android:singleLine="true"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:imeOptions="actionDone"
+                android:imeActionLabel="@string/start"
+                android:maxWidth="500dp" android:minWidth="300dp"/>
 
         <Button
                 android:layout_width="wrap_content"
@@ -37,7 +46,7 @@
                 android:id="@+id/start"
                 android:layout_below="@+id/point_count"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp" android:paddingTop="8dp"/>
 
 
     </RelativeLayout>

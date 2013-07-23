@@ -1,7 +1,7 @@
 package com.example.PointsGraph.manager;
 
 import android.content.Context;
-import com.actionbarsherlock.R;
+import com.example.PointsGraph.R;
 
 /**
  * Created with IntelliJ IDEA.

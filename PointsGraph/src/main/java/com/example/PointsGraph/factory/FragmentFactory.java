@@ -1,8 +1,11 @@
 package com.example.PointsGraph.factory;
 
 import android.support.v4.app.Fragment;
+import com.example.PointsGraph.ParamsFragmentContainer;
 import com.example.PointsGraph.fragment.GraphFragment;
+import com.example.PointsGraph.fragment.GraphFragment_;
 import com.example.PointsGraph.fragment.ParamsFragment;
+import com.example.PointsGraph.fragment.ParamsFragment_;
 import com.example.PointsGraph.model.Point;
 
 import java.util.ArrayList;
@@ -23,13 +26,14 @@ public class FragmentFactory {
         return fragmentList.size();
     }
 
-    public FragmentFactory setParamsFragment(int count) {
+    public FragmentFactory setParamsFragment(int count, ParamsFragmentContainer container) {
         if (fragmentList == null || fragmentList.size() == 0) {
             fragmentList = new ArrayList<Fragment>();
+            fragmentList.add(new ParamsFragment_());
 
-        } else {
-            ((ParamsFragment) fragmentList.get(0)).setPointsCount(count);
         }
+        ParamsFragment paramsFragment = (ParamsFragment) fragmentList.get(0);
+        paramsFragment.setPointsCount(count).setContainer(container);
         return this;
     }
 
@@ -39,7 +43,7 @@ public class FragmentFactory {
         }
 
         if (fragmentList.size() == 1) {
-            fragmentList.add(new GraphFragment());
+            fragmentList.add(new GraphFragment_());
         }
 
         ((GraphFragment) fragmentList.get(1)).setPoints(points);

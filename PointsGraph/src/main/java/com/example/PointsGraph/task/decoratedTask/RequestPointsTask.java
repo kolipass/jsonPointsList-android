@@ -2,11 +2,12 @@ package com.example.PointsGraph.task.decoratedTask;
 
 
 import android.util.Base64;
+import com.example.PointsGraph.DataStore;
 import com.example.PointsGraph.ServerRequestSender;
 import com.example.PointsGraph.manager.AbstractStringResourceManager;
 import com.example.PointsGraph.model.Point;
 import com.example.PointsGraph.model.ServerResponse;
-import com.example.PointsGraph.task.TaskAbstract;
+import com.example.PointsGraph.task.AbstractTask;
 import com.example.PointsGraph.task.TaskStatus;
 
 import java.io.*;
@@ -19,7 +20,7 @@ public class RequestPointsTask extends DecoratedTaskAbstract {
     String request;
     String urlParameters;
 
-    public RequestPointsTask(AbstractStringResourceManager resourceManager, String tag, TaskAbstract preExecutableTask,
+    public RequestPointsTask(AbstractStringResourceManager resourceManager, String tag, AbstractTask preExecutableTask,
                              String request, String urlParameters) {
         super(resourceManager, tag, preExecutableTask);
         this.request = request;
@@ -30,6 +31,7 @@ public class RequestPointsTask extends DecoratedTaskAbstract {
     protected TaskStatus currentHeavyTask() {
         taskStatus.setStatus(STATUS_START);
         taskStatus.setMessage(request);
+        publishProgress(taskStatus);
 
         ServerRequestSender sr = null;
         try {
@@ -88,6 +90,7 @@ public class RequestPointsTask extends DecoratedTaskAbstract {
     private TaskStatus successResult(ServerResponse serverResponse) {
         List<Point> points = serverResponse.getResponse().getPoints();
         if (points != null && points.size() > 0) {
+            DataStore.getInstance().addServerResponse(serverResponse);
             taskStatus.setStatus(STATUS_FINISH);
         } else {
             taskStatus.setStatus(STATUS_ERROR);
@@ -116,7 +119,10 @@ public class RequestPointsTask extends DecoratedTaskAbstract {
     }
 
     private String decodeMessage(String message) {
+
+
         byte[] decoded = null;
+        if (message.lastIndexOf("=") == (message.length() - 1))
         try {
             decoded = Base64.decode(message, Base64.DEFAULT);
         } catch (RuntimeException e) {

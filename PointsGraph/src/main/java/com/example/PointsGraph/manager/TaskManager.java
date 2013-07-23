@@ -1,6 +1,6 @@
 package com.example.PointsGraph.manager;
 
-import com.example.PointsGraph.task.TaskAbstract;
+import com.example.PointsGraph.task.AbstractTask;
 import com.example.PointsGraph.task.TaskStatus;
 import com.example.PointsGraph.task.decoratedTask.DecoratedTaskAbstract;
 
@@ -17,10 +17,10 @@ import java.util.Observer;
  */
 public class TaskManager extends Observable implements Observer {
     private static volatile TaskManager instance;
-    Map<String, TaskAbstract> taskMap;
+    Map<String, AbstractTask> taskMap;
 
     private TaskManager() {
-        this.taskMap = new HashMap<String, TaskAbstract>();
+        this.taskMap = new HashMap<String, AbstractTask>();
     }
 
     public static TaskManager getInstance() {
@@ -42,7 +42,7 @@ public class TaskManager extends Observable implements Observer {
      * @param tag тег загрузки
      */
     public void start(String tag) {
-        TaskAbstract task = taskMap.get(tag);
+        AbstractTask task = taskMap.get(tag);
         if (task != null && task.getTaskStatus().getStatus() != TaskStatus.STATUS_WORKING) {
             task.createTreadTask();
         }
@@ -54,7 +54,7 @@ public class TaskManager extends Observable implements Observer {
      * @param tag  тег загрузки
      * @param task Задача, которую стартуем.
      */
-    public void start(String tag, TaskAbstract task) {
+    public void start(String tag, AbstractTask task) {
         if (!tag.isEmpty() && task != null) {
             if (taskMap != null) {
                 if (!taskMap.containsKey(tag)) {
@@ -65,20 +65,20 @@ public class TaskManager extends Observable implements Observer {
         }
     }
 
-    public void addTask(String tag, TaskAbstract task) {
+    public void addTask(String tag, AbstractTask task) {
         task.addObserver(this);
         taskMap.put(tag, task);
     }
 
     public void pause(String tag) {
-        TaskAbstract task = getTask(tag);
+        AbstractTask task = getTask(tag);
         if (task != null) {
             task.pause();
         }
     }
 
-    public TaskAbstract getTask(String tag) {
-        TaskAbstract task = null;
+    public AbstractTask getTask(String tag) {
+        AbstractTask task = null;
         if (tag != null && !tag.isEmpty()) {
             task = taskMap.get(tag);
         }
@@ -93,7 +93,7 @@ public class TaskManager extends Observable implements Observer {
      */
     public int getTaskMaxLevel(String tag) {
         int level = 0;
-        TaskAbstract taskAbstract = getTask(tag);
+        AbstractTask taskAbstract = getTask(tag);
         if (taskAbstract != null && taskAbstract instanceof DecoratedTaskAbstract) {
             DecoratedTaskAbstract task = (DecoratedTaskAbstract) taskAbstract;
             level = task.taskLevel();
@@ -102,14 +102,14 @@ public class TaskManager extends Observable implements Observer {
     }
 
     public void resume(String tag) {
-        TaskAbstract task = getTask(tag);
+        AbstractTask task = getTask(tag);
         if (task != null) {
             task.resume();
         }
     }
 
     public void cancel(String tag) {
-        TaskAbstract task = getTask(tag);
+        AbstractTask task = getTask(tag);
         if (task != null) {
             task.cancel();
         }
@@ -117,7 +117,7 @@ public class TaskManager extends Observable implements Observer {
 
     @Override
     public void update(Observable task, Object taskStatus) {
-        if (task != null && task instanceof TaskAbstract) {
+        if (task != null && task instanceof AbstractTask) {
             System.out.println(taskStatus);
             setChanged();
             notifyObservers(taskStatus);

@@ -1,7 +1,7 @@
 package com.example.PointsGraph.task.decoratedTask;
 
 import com.example.PointsGraph.manager.AbstractStringResourceManager;
-import com.example.PointsGraph.task.TaskAbstract;
+import com.example.PointsGraph.task.AbstractTask;
 import com.example.PointsGraph.task.TaskStatus;
 
 import java.util.Observable;
@@ -14,16 +14,16 @@ import java.util.Observer;
  * <p/>
  * Динамически наделяемый новыми свойствами таск. Последовательное выполнение свойств
  */
-public abstract class DecoratedTaskAbstract extends TaskAbstract implements Observer {
-    TaskAbstract preExecutableTask;
+public abstract class DecoratedTaskAbstract extends AbstractTask implements Observer {
+    AbstractTask preExecutableTask;
 
-    protected DecoratedTaskAbstract(AbstractStringResourceManager resourceManager, String tag, TaskAbstract preExecutableTask) {
+    protected DecoratedTaskAbstract(AbstractStringResourceManager resourceManager, String tag, AbstractTask preExecutableTask) {
         super(resourceManager, tag);
         this.preExecutableTask = preExecutableTask;
         taskStatus.setLevel(taskLevel());
     }
 
-    public void setPreExecutableTask(TaskAbstract preExecutableTask) {
+    public void setPreExecutableTask(AbstractTask preExecutableTask) {
         this.preExecutableTask = preExecutableTask;
     }
 
@@ -65,7 +65,7 @@ public abstract class DecoratedTaskAbstract extends TaskAbstract implements Obse
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof TaskAbstract) {
+        if (o instanceof AbstractTask) {
             if (arg instanceof TaskStatus) {
                 try {
                     publishProgress((TaskStatus) arg);

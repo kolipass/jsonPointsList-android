@@ -2,18 +2,22 @@ package com.example.PointsGraph.fragment;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.widget.ArrayAdapter;
+import android.view.LayoutInflater;
 import android.widget.FrameLayout;
-import com.actionbarsherlock.app.SherlockListFragment;
+import android.widget.ListView;
+import android.widget.Toast;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.example.PointsGraph.GalleryFileManager;
 import com.example.PointsGraph.R;
+import com.example.PointsGraph.adapter.PointsListAdapter;
+import com.example.PointsGraph.adapter.PointsTableListItemController;
 import com.example.PointsGraph.model.Point;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.EFragment;
-import com.googlecode.androidannotations.annotations.ViewById;
+import com.googlecode.androidannotations.annotations.*;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,10 +30,13 @@ import java.util.List;
  * Фрагметн контролирует экран с графиком и таблицей координат
  */
 @EFragment(R.layout.graph_fragment)
-public class GraphFragment extends SherlockListFragment {
+public class GraphFragment extends SherlockFragment {
     @ViewById(R.id.graph)
     FrameLayout graphLayout;
-    List<Point> points;
+    @ViewById(android.R.id.list)
+    ListView listView;
+    @InstanceState
+    ArrayList<Point> points;
     Context context;
     Comparator<Point> comparator = new Comparator<Point>() {
         @Override
@@ -37,19 +44,24 @@ public class GraphFragment extends SherlockListFragment {
             return Double.compare(p1.getX(), p2.getX());
         }
     };
+    GraphView graphView;
 
     @AfterViews
     void afterViews() {
         context = getActivity();
         if (points != null && points.size() > 0) {
-            setAdapter(points);
             setGraph(points);
+            setAdapter(points);
         }
     }
 
     void setAdapter(List<Point> points) {
-        ArrayAdapter<Point> adapter = new ArrayAdapter<Point>(context, android.R.layout.simple_list_item_1, points);
-        setListAdapter(adapter);
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        PointsTableListItemController controller =
+                new PointsTableListItemController(inflater.inflate(R.layout.table_list_item, null)).setPoint("X", "Y");
+        listView.addHeaderView(controller.getView(), null, false);
+        listView.setAdapter(new PointsListAdapter(points, context));
     }
 
     void setGraph(List<Point> points) {
@@ -61,15 +73,28 @@ public class GraphFragment extends SherlockListFragment {
         }
 
         String lineTitle = context.getString(R.string.line_title);
-        GraphView graphView = new LineGraphView(context, lineTitle);
+        graphView = new LineGraphView(context, lineTitle);
 
         graphView.addSeries(new GraphViewSeries(data));
         // set view port, start=2, size=40
         graphView.setViewPort(2, 40);
         graphView.setScrollable(true);
         graphView.setScalable(true);
+        graphView.setDrawingCacheEnabled(true);
 
         graphLayout.addView(graphView);
+    }
+
+    @Click(R.id.save_to_gallary)
+    void onLongClick() {
+        if (graphView != null) {
+            String fileName = new GalleryFileManager(context).savePNG(graphView.getDrawingCache());
+            if (fileName != null) {
+                Toast.makeText(context, "успех: " + fileName, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "неудача", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void setComparator(Comparator<Point> comparator) {
@@ -82,7 +107,8 @@ public class GraphFragment extends SherlockListFragment {
 
     public Fragment setPoints(List<Point> points) {
         Collections.sort(points, comparator);
-        this.points = points;
+        this.points = points instanceof ArrayList ? (ArrayList<Point>) points : new ArrayList<Point>(points);
         return this;
     }
 }
+

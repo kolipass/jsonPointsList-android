@@ -1,6 +1,11 @@
 package com.example.PointsGraph.fragment;
 
+import android.app.Activity;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.PointsGraph.ParamsFragmentContainer;
 import com.example.PointsGraph.R;
@@ -13,7 +18,7 @@ import com.googlecode.androidannotations.annotations.*;
  * Time: 14:50
  * Фрагмент контролирует view параметров запроса
  */
-@EActivity(R.layout.request_params)
+@EFragment(R.layout.request_params)
 public class ParamsFragment extends SherlockFragment {
     @ViewById(R.id.point_count)
     EditText pointCountEditText;
@@ -23,25 +28,41 @@ public class ParamsFragment extends SherlockFragment {
 
     @AfterViews
     void afterViews() {
+        if (container==null){
+            container = (ParamsFragmentContainer) getActivity();
+        }
         if (pointsCount > 0) {
             pointCountEditText.setText(String.valueOf(pointsCount));
         }
+        pointCountEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo. IME_ACTION_DONE) {
+                    start();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
     }
 
-    public void setPointsCount(int pointsCount) {
+    public ParamsFragment setPointsCount(int pointsCount) {
         this.pointsCount = pointsCount;
         if (isAdded()) {
             afterViews();
-        }
+        }     return this;
     }
 
-    public SherlockFragment setContainer(ParamsFragmentContainer container) {
+    public ParamsFragment setContainer(ParamsFragmentContainer container) {
         this.container = container;
         return this;
     }
 
     @Click(R.id.start)
     void start() {
+        InputMethodManager inputMethodManager = (InputMethodManager)  getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         try {
             String inputCount = pointCountEditText.getText().toString();
             if (inputCount.length() == 0) {
