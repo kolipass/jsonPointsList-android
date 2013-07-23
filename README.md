@@ -1,7 +1,7 @@
 jsonPointsList-android
 ======================
 
-tempory repo
+temporary repo
 
 Easy launch:Maven
 ----
