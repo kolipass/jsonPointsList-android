@@ -3,7 +3,7 @@ jsonPointsList-android
 
 temporary repo
 
-Easy launch:Maven
+Easy way to launch: use Maven
 ----
 Execute this in your workspace:
 ```
