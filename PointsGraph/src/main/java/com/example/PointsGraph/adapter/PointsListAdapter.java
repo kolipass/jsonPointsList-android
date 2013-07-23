@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 import com.example.PointsGraph.R;
 import com.example.PointsGraph.model.Point;
 
@@ -20,7 +19,7 @@ import java.util.Map;
  * User: Kolipass
  * Date: 24.07.13
  * Time: 0:17
- * Information about this garbage is coming soon
+ * Адаптер для списка координат
  */
 public class PointsListAdapter implements ListAdapter {
     protected Map<Integer, PointsTableListItemController> controllerMap =

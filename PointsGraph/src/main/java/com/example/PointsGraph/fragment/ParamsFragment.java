@@ -81,4 +81,3 @@ public class ParamsFragment extends SherlockFragment {
         }
     }
 }
-

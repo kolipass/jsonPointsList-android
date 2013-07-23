@@ -1,7 +1,6 @@
 package com.example.PointsGraph.task;
 
 import android.content.Context;
-import com.example.PointsGraph.manager.AbstractStringResourceManager;
 import com.example.PointsGraph.manager.StringResourceManager;
 import com.example.PointsGraph.task.decoratedTask.DecoratedTaskAbstract;
 import com.example.PointsGraph.task.decoratedTask.RequestPointsTask;
@@ -16,10 +15,13 @@ import java.util.List;
  * User: artem
  * Date: 15.03.13
  * Time: 11:06
+ * <p/>
+ * Самобытный строитель тасков. Строит параметры для корректного запроса к серверу и пораждает готовый
+ * к использовнаию таск
  */
 public class TaskBuilder {
 
-    public static DecoratedTaskAbstract getRequestPointsTask( Context context,int count, String tag)
+    public static DecoratedTaskAbstract getRequestPointsTask(Context context, int count, String tag)
             throws UnsupportedEncodingException {
         String request = "https://demo.bankplus.ru/mobws/json/pointsList";
         List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();

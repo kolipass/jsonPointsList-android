@@ -3,7 +3,7 @@ package com.example.PointsGraph.task.decoratedTask;
 
 import android.util.Base64;
 import com.example.PointsGraph.DataStore;
-import com.example.PointsGraph.ServerRequestSender;
+import com.example.PointsGraph.manager.ServerRequestSender;
 import com.example.PointsGraph.manager.AbstractStringResourceManager;
 import com.example.PointsGraph.model.Point;
 import com.example.PointsGraph.model.ServerResponse;
@@ -119,7 +119,6 @@ public class RequestPointsTask extends DecoratedTaskAbstract {
     }
 
     private String decodeMessage(String message) {
-
 
         byte[] decoded = null;
         if (message.lastIndexOf("=") == (message.length() - 1))

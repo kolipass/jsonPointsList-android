@@ -2,6 +2,11 @@ package com.example.PointsGraph.model;
 
 import java.util.List;
 
+/**
+ * В response при ошибках содержится объект message с текстом причины,
+ * он может быть на английском языке, либо на русском (закодированный Base64)
+ */
+
 public class Response {
     List<Point> points;
     String message;

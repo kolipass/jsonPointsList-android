@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.example.PointsGraph.GalleryFileManager;
+import com.example.PointsGraph.manager.GalleryFileManager;
 import com.example.PointsGraph.R;
 import com.example.PointsGraph.adapter.PointsListAdapter;
 import com.example.PointsGraph.adapter.PointsTableListItemController;
@@ -111,4 +111,3 @@ public class GraphFragment extends SherlockFragment {
         return this;
     }
 }
-

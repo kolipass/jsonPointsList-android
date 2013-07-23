@@ -27,16 +27,6 @@ public abstract class AbstractTask extends Observable implements Runnable {
         this.tag = tag;
     }
 
-    /**
-     * Получим имя файла
-     *
-     * @param url путь из которого выудим последнюю часть после /
-     * @return верну строку, как раз такую, как надо)
-     */
-
-    static public String getFileName(String url) {
-        return url.substring(url.lastIndexOf('/') + 1);
-    }
 
     /**
      * Для ограничения колличества вызовов обновления на задачах с "многотысячным" процессом.

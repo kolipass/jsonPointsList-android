@@ -1,4 +1,4 @@
-package com.example.PointsGraph;
+package com.example.PointsGraph.manager;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -10,6 +10,10 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ *
+ * Своебразный менеджер сертификатов ssl. Умеет общаться с сервером по средствам https
+ *
+ *
  * @author Makarov A D
  */
 public class ServerRequestSender {

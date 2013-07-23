@@ -32,6 +32,12 @@ public class DataStore {
         return instance;
     }
 
+    /**
+     * Добавить ответ от сервера
+     * Добавит ответ крайним в список и вытолкнен первый посупивший элемент, если достигнут лимит
+     *
+     * @param serverResponse Ответ от сервера
+     */
     public void addServerResponse(ServerResponse serverResponse) {
         if (serverResponses.size() == (countLimit - 1)) {
             serverResponses.remove(0);
@@ -39,11 +45,19 @@ public class DataStore {
             serverResponses.add(serverResponse);
         }
     }
-   public ServerResponse getServerResponse(int id) throws IndexOutOfBoundsException{
-        return  serverResponses.get(id);
+
+    public ServerResponse getServerResponse(int id) throws IndexOutOfBoundsException {
+        return serverResponses.get(id);
     }
 
-    public ServerResponse peekServerResponse() throws IndexOutOfBoundsException{
-        return  serverResponses.get(serverResponses.size()-1);
+    /**
+     * По аналогии со стеком - взять крайний элемент списка не вытесняя его
+     *
+     * @return крайний элемет списка
+     * @throws IndexOutOfBoundsException произайдет при запросе крайнего из пустой коллекции
+     */
+
+    public ServerResponse peekServerResponse() throws IndexOutOfBoundsException {
+        return serverResponses.get(serverResponses.size() - 1);
     }
 }

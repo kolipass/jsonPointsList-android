@@ -1,8 +1,7 @@
 package com.example.PointsGraph.manager;
 
 /**
- * Менеджер строковых ресурсов. Нужен для того. чтобы не таскать везде контекст.
- * Здесь будут обертки к функциям получения ресурса по
+ * Менеджер строковых ресурсов для тасков
  */
 public abstract class AbstractStringResourceManager {
     abstract public String getKeyManagementError() ;

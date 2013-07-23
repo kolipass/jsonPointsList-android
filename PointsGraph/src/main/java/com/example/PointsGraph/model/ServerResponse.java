@@ -5,7 +5,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import java.io.IOException;
 
 /**
- * Created by Kolipass on 19.07.13.
+ * Ответ от сервера в вида:
+ *
+ * {"result":0,"response":{"points":[{"x":"1.23", "y":"2.44"},{"x":"2.17", "y":"3.66"}]}}
+ *
+ * парсится в данную модель
  */
 public class ServerResponse {
     Integer result;

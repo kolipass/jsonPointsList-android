@@ -4,11 +4,7 @@ import android.content.Context;
 import com.example.PointsGraph.R;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Kolipass
- * Date: 23.07.13
- * Time: 1:48
- * Information about this garbage is coming soon
+ * реализация        AbstractStringResourceManager
  */
 public class StringResourceManager extends AbstractStringResourceManager {
     Context context;

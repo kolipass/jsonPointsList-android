@@ -4,6 +4,10 @@ import android.view.View;
 import android.widget.TextView;
 import com.example.PointsGraph.model.Point;
 
+/**
+ * Контроллер для использования в адаптере. Повышает производительность сокращением поисков View По Id
+ */
+
 public class PointsTableListItemController {
     protected View container;
     String x;
